@@ -1,14 +1,18 @@
 package org.exampl.manager;
 
+import lombok.RequiredArgsConstructor;
+import org.exampl.Jdbc.NvidiaJdbc;
 import org.exampl.comparison.GameComparison;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Executable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class GameComparisonManager {
+    private final NvidiaJdbc jdbc;
+
     private long nextId =1;
     private List<GameComparison> items = new ArrayList<>();
 

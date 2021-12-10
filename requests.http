@@ -1,0 +1,16 @@
+### get all
+http://localhost:8080/getAll
+
+### Add
+http://localhost:8080/save?id=0&name=Asus Predator Ti3060&price=200000&videoMemory=12&coolingType=Full3&manufacture=Asus&qty=5
+
+
+###Update
+http://localhost:8080/update?id=2&name=delongi PredatorTi3060&price=310000&videoMemory=14&coolingType=Full3&manufacture=Asus&qty=5
+
+
+###Remove by id
+http://localhost:8080/removeById?id=2
+
+###Restore by id
+http://localhost:8080/restoreById?id=1

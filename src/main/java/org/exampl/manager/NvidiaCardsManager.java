@@ -1,56 +1,37 @@
 package org.exampl.manager;
 
-import org.exampl.comparison.GameComparison;
+import lombok.RequiredArgsConstructor;
+import org.exampl.Jdbc.NvidiaJdbc;
 import org.exampl.videoCards.NvidiaCards;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class NvidiaCardsManager {
-    private long nextId =1;
-    private List<NvidiaCards> items = new ArrayList<>();
+    private final NvidiaJdbc jdbc;
+    private final JdbcTemplate template;
 
-    public NvidiaCards getById(long id) {
-        for (NvidiaCards item : items) {
-            if (item.getId() == id) {
-                return item;
-            }
-        }
-        return null;
+    public List<NvidiaCards> getAll(){
+        return
+        return jdbc.getAll();
     }
 
-    public NvidiaCards deleteById(long id) {
-        int index = findIndexById(id);
-        if (index==-1){
-            return null;
+    public NvidiaCards save(NvidiaCards item){
+        if(item.getId()==0){
+            return jdbc.add(item);
         }
-        return items.remove(index);
+        return jdbc.update(item);
     }
 
-    public NvidiaCards save(NvidiaCards item) {
-        if (item.getId()==0){
-            item.setId(nextId++);
-            items.add(item);
-            return item;
-        }
-        int index = findIndexById(item.getId());
-        if (index==-1){
-            return null;
-        }
-        items.set(index, item);
-        return item;
+    public void removeById(long id){
+        jdbc.removeById(id);
     }
 
-    private int findIndexById(long id){
-        int index = 0;
-        for (NvidiaCards item : items) {
-            if(item.getId()==id){
-                return index;
-            }
-            index++;
-        }
-        return -1;
+    public void restoreById(long id){
+        jdbc.restoreById(id);
     }
+
 }

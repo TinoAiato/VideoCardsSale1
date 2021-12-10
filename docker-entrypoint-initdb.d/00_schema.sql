@@ -1,14 +1,14 @@
 CREATE TABLE cards
 (
-    id BIGSERIAL PRIMARY KEY
+    id BIGSERIAL PRIMARY KEY,
     name TEXT NOT NULL,
     price INT NOT NULL CHECK (price >= 0),
     videoMemory INT NOT NULL CHECK (videoMemory>=0),
     coolingType TEXT NOT NULL,
     manufacture TEXT NOT NULL,
-    qty INT NO NULL CHECK (qty >=0) DEFAULT 0,
+    qty INT NOT NULL CHECK (qty >=0) DEFAULT 0,
     removed BOOLEAN NOT NULL DEFAULT FALSE,
-    create timestamptz NOT NULL DEFAULT current_timestamp
+    created timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE games

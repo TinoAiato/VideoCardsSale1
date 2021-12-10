@@ -1,9 +1,6 @@
 package org.exampl.controller;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.exampl.comparison.GameComparison;
-import org.exampl.manager.GameComparisonManager;
+import lombok.RequiredArgsConstructor;
 import org.exampl.manager.NvidiaCardsManager;
 import org.exampl.videoCards.NvidiaCards;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,23 +8,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
+
 public class NvidiaCardsController {
-    private NvidiaCardsManager nvidiaCardsManager;
+    private final NvidiaCardsManager manager;
+
+    @RequestMapping("/getAll")
+    public List<NvidiaCards> getAll(){
+        return manager.getAll();
+    }
+
     @RequestMapping("/save")
     public NvidiaCards save(@ModelAttribute NvidiaCards item){
-
-        return nvidiaCardsManager.save(item);
+        return manager.save(item);
     }
 
-    @RequestMapping("/getById")
-    public NvidiaCards getById(@RequestParam long id){
-        return nvidiaCardsManager.getById(id);
+    @RequestMapping("/removeById")
+    public void removeById(@RequestParam long id){
+        manager.removeById(id);
     }
-    @RequestMapping("/deleteById")
-    public NvidiaCards deleteById(@RequestParam long id){
-        return nvidiaCardsManager.deleteById(id);
+
+    @RequestMapping("/restoreById")
+    public void restoreById(@RequestParam long id){
+        manager.restoreById(id);
     }
 }

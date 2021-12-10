@@ -15,4 +15,5 @@ public class NvidiaCards {
     public int videoMemory;
     public String coolingType;
     public String manufacture;
+    public int qty;
 }
